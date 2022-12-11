@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-admin-layout >
     <?php $number = 1 ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
@@ -38,8 +38,13 @@
                   <tr>
                     <th>#</th>
                     <th>Emergency Id</th>
+                    <th>User_ID</th>
                     <th>Emergency Type</th>
+                    <th>Location</th>
+                    <th>Address (IP)</th>
                     <th>Description</th>
+                    <th>Status</th>
+                    <th>Created</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -47,8 +52,13 @@
                     <tr>
                         <td>{{ $number++ }}</td>
                         <td>{{ $emergency->id }}</td>
+                        <td>user_id</td>
                         <td>{{ $emergency->name }}</td>
+                        <td>{{ $emergency->region }}</td>
+                        <td>{{ $emergency->ip }}</td>
                         <td>{{ $emergency->description }}</td>
+                        <td>{{ $emergency->status }}</td>
+                        <td>{{ date('M j, Y h:ia', strtotime($emergency->created_at)) }}</td>
                     </tr>
                 @endforeach
                 </tbody>

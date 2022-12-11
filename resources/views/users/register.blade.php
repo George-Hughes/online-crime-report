@@ -168,6 +168,7 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
+                            {{-- <input type="text" name="role" value="1" hidden> --}}
                             <div class="col-md-4">
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control" name="email" id="floatingInput"

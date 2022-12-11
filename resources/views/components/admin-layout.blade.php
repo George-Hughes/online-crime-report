@@ -26,6 +26,14 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets2/css/sb-admin-2.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('assets/js/alpinejs.js') }}" defer></script>
+
+    {{-- Leaflet --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
   </head>
 
   <style>
@@ -112,7 +120,7 @@
 
         <!-- Nav Item - Crimes -->
         <li class="nav-item {{ request()->is('admin/manage-feedbacks') ? 'active' : '' }}">
-          <a class="nav-link" href="/admin/manage-feedbacks">
+          <a class="nav-link" href="/admin/manage_feedbacks">
             <i class="fas fa-fw fa-comment"></i>
             <span>Manage Feedbacks</span></a
           >
@@ -151,13 +159,15 @@
               <div class="input-group">
                 <input
                   type="text"
+                  name="search"
+                  value="{{ old('search') }}"
                   class="form-control bg-light border-0 small"
                   placeholder="Search for..."
                   aria-label="Search"
                   aria-describedby="basic-addon2"
                 />
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">
+                  <button class="btn btn-primary" type="submit">
                     <i class="fas fa-search fa-sm"></i>
                   </button>
                 </div>
@@ -188,13 +198,14 @@
                     <div class="input-group">
                       <input
                         type="text"
+                        name="search"
                         class="form-control bg-light border-0 small"
                         placeholder="Search for..."
                         aria-label="Search"
                         aria-describedby="basic-addon2"
                       />
                       <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="submit">
                           <i class="fas fa-search fa-sm"></i>
                         </button>
                       </div>
@@ -216,7 +227,9 @@
                 >
                   <i class="fas fa-bell fa-fw"></i>
                   <!-- Counter - Alerts -->
-                  <span class="badge badge-danger badge-counter">3+</span>
+                  <span class="badge badge-danger badge-counter">3+
+                    {{-- {{ $news->count() }} --}}
+                  </span>
                 </a>
                 <!-- Dropdown - Alerts -->
                 <div

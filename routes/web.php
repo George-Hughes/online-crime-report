@@ -5,7 +5,9 @@ use App\Http\Controllers\CrimeController;
 use App\Http\Controllers\CrimeTypeController;
 use App\Http\Controllers\EmergencyController;
 use App\Http\Controllers\EmergencyTypeController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -71,9 +73,6 @@ Route::post('/emergency', [EmergencyController::class, 'store']);
 // ///////////////////////////// CRIME /////////////////////////////
 
 // Show create crime type page 
-Route::get('/crimes/review', [CrimeController::class, 'index']);
-
-// Show create crime type page 
 Route::get('/crimes/create', [CrimeTypeController::class, 'create']);
 
 // Store Crime Type in Database
@@ -82,34 +81,39 @@ Route::post('/crimes/create', [CrimeTypeController::class, 'store']);
 // Store Crime in Database
 Route::post('/crimes', [CrimeController::class, 'store']);
 
-// SShow Crime details Page
-// Route::get('/crimes/{crime}', [CrimeController::class, 'show']);
+// Store Crime in Database
+Route::post('/crimes/{crime}/update', [CrimeController::class, 'update']);
 
 // Delete Crime form Database
-// Route::delete('/crimes/{crime}', [CrimeController::class, 'destroy']);
+Route::delete('/crimes/{crime}', [CrimeController::class, 'destroy']);
 
 // ///////////////////////////// CRIME /////////////////////////////
 
 
+// //////////////////////// SUPER ADMIN ///////////////////////////////
+Route::get('/super-admin/admin', [SuperAdminController::class, 'index']);
+// //////////////////////// SUPER ADMIN ///////////////////////////////
 
 
 // ///////////////////////////// ADMIN /////////////////////////////
-Route::middleware(['auth','isAdmin'])->group(function(){
+Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
     // Show Admin Dashboard
-    Route::get('/admin/dashboard', [AdminController::class, 'index']);
+    Route::get('/dashboard', [AdminController::class, 'index']);
 
     // Show Admin Manage Users
-    Route::get('/admin/manage-users', [AdminController::class, 'manage_users']);
+    Route::get('/manage-users', [AdminController::class, 'manage_users']);
     // Show Admin Manage Users
 
-    Route::get('/admin/manage-crimes', [AdminController::class, 'manage_crimes']);
+    Route::get('/manage-crimes', [AdminController::class, 'manage_crimes']);
     // Show Admin Manage Users
 
-    Route::get('/admin/manage-emergencies', [AdminController::class, 'manage_emergencies']);
+    Route::get('/manage-emergencies', [AdminController::class, 'manage_emergencies']);
     // Show Admin Manage Users
 
-    Route::get('/admin/manage-news', [AdminController::class, 'manage_news']);
+    Route::get('/manage-news', [AdminController::class, 'manage_news']);
 
+    
+    Route::get('/manage-feedbacks', [AdminController::class, 'manage_feedbacks']);
     // Store Emergency in Database
     // Route::post('/crimes', [CrimeController::class, 'store']);
 });
@@ -136,7 +140,10 @@ Route::post('/logout', [UserController::class, 'destroy'])->middleware('auth');
 // ///////////////////////// USER////////////////////////////
 
 
-
+///////////////////////// CRIME STSRT ///////////////////////////
+// Show Single Crime Page
+Route::get('/crimes/{crime}', [CrimeController::class, 'show']);
+///////////////////////// CRIME ENDS ///////////////////////////
 
 // ///////////////////////// NEWS END////////////////////////////
 // Show Single News Page

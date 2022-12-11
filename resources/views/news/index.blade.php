@@ -5,7 +5,7 @@
         {{-- Hero --}}
         {{-- @include('partials._hero') --}}
         {{-- @foreach ($allCrimeTypes as $allCrimeType) --}}
-            <x-hero :allCrimeTypes="$allCrimeTypes"/>
+            <x-hero :allCrimeTypes="$allCrimeTypes" :location="$location"/>
         {{-- @endforeach --}}
         {{-- Hero --}}
     </div>
@@ -16,12 +16,35 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {{-- Demo --}}
                 @foreach ($news as $new)
-                    <x-news-card :new="$new"/>
+                    <x-news-card :new="$new" />
 
                 @endforeach
                 {{-- Demo --}}
             </div>
         </div>
+
+        {{-- Location --}}
+        {{-- <div class="container">
+            <h1>How to Get Current User Location with Laravel - Tutsmake.com</h1>
+            <div class="card">
+                <div class="card-body">
+                    @if($location)
+                        <h4>IP: {{ $location->ip }}</h4>
+                        <h4>Country Name: {{ $location->countryName }}</h4>
+                        <h4>Country Code: {{ $location->countryCode }}</h4>
+                        <h4>Region Code: {{ $location->regionCode }}</h4>
+                        <h4>Region Name: {{ $location->regionName }}</h4>
+                        <h4>City Name: {{ $location->cityName }}</h4>
+                        <h4>Zip Code: {{ $location->zipCode }}</h4>
+                        <h4>Latitude: {{ $location->latitude }}</h4>
+                        <h4>Longitude: {{ $location->longitude }}</h4>
+                        <h2><?php echo $location->longitude ?></h2>
+                    @endif
+                </div>
+            </div>
+        </div> --}}
+        {{-- Location --}}
+
 
         {{-- Pagination --}}
         <div class="container">
@@ -37,4 +60,3 @@
 
 </x-layout>
  
-

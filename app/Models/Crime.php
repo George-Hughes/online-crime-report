@@ -12,6 +12,10 @@ class Crime extends Model
     protected $fillable = [
         'name',
         'description',
-        'status'
+        'status',
+        'ip',
+        'region',
+        'lat',
+        'lng'
     ];
 }

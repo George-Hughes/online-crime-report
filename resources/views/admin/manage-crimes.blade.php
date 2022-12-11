@@ -40,6 +40,8 @@
                     <th>Crime ID</th>
                     <th>User_ID</th>
                     <th>Crime Type</th>
+                    <th>Location</th>
+                    <th>Address (IP)</th>
                     <th>Description</th>
                     <th>status</th>
                     <th>Created</th>
@@ -54,14 +56,16 @@
                         <td>{{ $crime->id }}</td>
                         <td>User id</td>
                         <td>{{ $crime->name }}</td>
+                        <td>{{ $crime->region }}</td>
+                        <td>{{ $crime->ip }}</td>
                         <td>{{ $crime->description }}</td>
                         <td>{{ $crime->status }}</td>
-                        <td>{{ $crime->created_at }}</td>
+                        <td>{{ date('M j, Y h:ia', strtotime($crime->created_at)) }}</td>
                         <td>
                           <div class="d-inline-flex">
-                            <a class="btn btn-sm btn-outline-primary mr-1" href="/review"><i class="fas fa-book"></i> Review</a>
+                            <a class="btn btn-sm btn-outline-primary mr-1" href="/crimes/{{ $crime->id }}"><i class="fas fa-book"></i> Review</a>
 
-                            <a class="btn btn-sm btn-outline-success mr-1" href="/news/{{ $crime->id }}/edit"><i class="fas fa-arrow-right"></i> Activate</a>
+                            <a class="btn btn-sm btn-outline-success mr-1" href="/crimes/{{ $crime->id }}/update"><i class="fas fa-arrow-right"></i> Activate</a>
 
                           <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
                               @csrf
@@ -72,6 +76,15 @@
                           </div>
                         </td>
                       </tr>
+
+                      {{-- Other data for js --}}
+                      <input id="ID" type="text" value="{{ $crime->id }}" hidden>
+                      <input id="LAT" type="text" value="{{ $crime->lat }}" hidden>
+                      <input id="LNG" type="text" value="{{ $crime->lng }}" hidden>
+                      <input id="C-TYPE" type="text" value="{{ $crime->name }}" hidden>
+                      <input id="REGION" type="text" value="{{ $crime->region }}" hidden>
+                      {{-- Other data for js --}}
+
                     @endif
                 @endforeach
                 </tbody>
@@ -116,7 +129,7 @@
                         <td>{{ $crime->name }}</td>
                         <td>{{ $crime->description }}</td>
                         <td>{{ $crime->status }}</td>
-                        <td>{{ $crime->created_at }}</td>
+                        <td>{{ date('M j, Y h:ia', strtotime($crime->created_at)) }}</td>
                       </tr>
                     @endif
                 @endforeach
@@ -125,6 +138,10 @@
             </div>
           </div>
         </div>
+  
+        {{-- Map Section Start --}}
+        <x-current-map :crimes="$crimes"/>
+        {{-- Map Section End --}}
 
         <div class="container">
             <div class="mt-3 p-3 pagination-md">

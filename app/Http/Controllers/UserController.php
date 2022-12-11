@@ -40,6 +40,7 @@ class UserController extends Controller
             'first_name' => 'required | min:3',
             'last_name' => 'required | min:3',
             'other_name' => 'nullable|min:3',
+            'role' => 'nullable',
             'gender' => 'required',
             'dob' => 'required',
             'contact' => 'required',

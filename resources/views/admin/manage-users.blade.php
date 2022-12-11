@@ -47,7 +47,7 @@
                         <td>{{ $user->dob }}</td>
                         <td>{{ $user->contact }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->created_at }}</td>
+                        <td>{{ date('M j, Y h:ia', strtotime($user->created_at)) }}</td>
                     </tr>
                 @endforeach
                 </tbody>

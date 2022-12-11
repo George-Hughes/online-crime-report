@@ -15,7 +15,7 @@ class CrimeController extends Controller
      */
     public function index()
     {
-        return view('crimes.review');
+        
     }
 
     /**
@@ -39,9 +39,15 @@ class CrimeController extends Controller
         $formFields = $request->validate(
             [
                 'name' => 'required',
+                'ip' => 'required',
+                'region' => 'required',
+                'lat' => 'required',
+                'lng' => 'required',
                 'description' => 'required | min:3',
             ]
         );
+
+        // dd($formFields);
 
         Crime::create($formFields);
 
@@ -56,9 +62,9 @@ class CrimeController extends Controller
      */
     public function show(Crime $crime)
     {
-        return view('crimes.review', compact([
+        return view('crimes.review', [
             'crime' => $crime
-        ]));
+        ]);
     }
 
     /**
@@ -87,6 +93,8 @@ class CrimeController extends Controller
             ]
         );
 
+        dd($formFields);
+
         $crime->update($formFields);
 
         return back()->with('message', 'Crime Activated Successfully');
@@ -100,10 +108,7 @@ class CrimeController extends Controller
      */
     public function destroy(Crime $crime)
     {
-        // if($new->user_id !== auth()->id()){
-        //     abort(403, 'Unauthorized Action');
-        // }
-        dd($crime->id);
+        // dd($crime->id);
 
         $crime->delete();
 

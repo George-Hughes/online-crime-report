@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::create('crimes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('ip')->default('154.160.21.7');
+            $table->string('region')->default('Greater Accra Region');
+            $table->string('lat')->default('5.5502');
+            $table->string('lng')->default('-0.2174');
             $table->longText('description');
             $table->string('status')->default('pending');
             $table->timestamps();

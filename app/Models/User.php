@@ -48,6 +48,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+     // Search
+     public function scopeFilter($query, array $filters){
+        if($filters['search'] ?? false){
+            $query->where('first_name','like','%' . request('search') . '%')
+                ->orWhere('last_name','like','%' . request('search') . '%')
+                ->orWhere('email','like','%' . request('search') . '%');
+        }
+    }
+
     // Relationship to User
     public function news(){
         return $this->belongsTo(News::class, 'user_id');

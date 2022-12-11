@@ -16,6 +16,14 @@ class News extends Model
         'description'
     ];
 
+    // Search
+    public function scopeFilter($query, array $filters){
+        if($filters['search'] ?? false){
+            $query->where('title','like','%' . request('search') . '%')
+                ->orWhere('description','like','%' . request('search') . '%');
+        }
+    }
+
     // Relationship to User
     public function user(){
         return $this->belongsTo(User::class, 'user_id');

@@ -6,17 +6,24 @@ use App\Models\CrimeType;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+// use Stevebauman\Location\Facades;
+use Stevebauman\Location\Facades\Location;
 
 class NewsController extends Controller
 {
     // Show all news
-    public function index()
+    public function index(Request $request)
     {
+        $ip = '154.160.21.7';
+        // $ip = request()->ip();
+        $location = Location::get($ip);
+        // dd($data);
+
         // $news = News::all();
         // return view('welcome',compact('news'));
         $allCrimeTypes = CrimeType::all();
         $news = News::latest()->paginate(6);
-        return view('news.index',compact('news','allCrimeTypes'));
+        return view('news.index',compact('news','allCrimeTypes','location'));
     }
 
     // Show Create news page

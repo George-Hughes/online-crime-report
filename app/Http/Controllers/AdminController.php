@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Crime;
 use App\Models\Emergency;
+use App\Models\Feedback;
 use App\Models\News;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,11 +22,13 @@ class AdminController extends Controller
         $crimes = Crime::all();
         $emergency = Emergency::all();
         $news = News::all();
-        return view('admin.dashboard', compact('users','crimes','emergency','news'));
+        $feedbacks = Feedback::all();
+        return view('admin.dashboard', compact('users','crimes','emergency','news', 'feedbacks'));
     }
 
     public function manage_users(){
-        $users = User::latest()->paginate(10);
+        // $users = User::latest()->paginate(10);
+        $users = User::latest()->filter(request(['search']))->paginate(10);
         return view('admin.manage-users', compact('users'));
     }
     
@@ -40,8 +43,16 @@ class AdminController extends Controller
     }
 
     public function manage_news(){
-        $news = News::latest()->paginate(5);
+        // $news = News::latest()->paginate(5);
+        $news = News::latest()->filter(request(['search']))->paginate(6);
+
         return view('admin.manage-news', compact('news'));
+    }
+
+    public function manage_feedbacks(){
+        $feedbacks = Feedback::latest()->paginate(5);
+        return view('admin.manage-feedbacks', compact('feedbacks'));
+        // return view('admin.manage-feedbacks');
     }
     
     // public function manage_feedbacks(){

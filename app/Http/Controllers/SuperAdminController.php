@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Emergency;
 use Illuminate\Http\Request;
 
-class EmergencyController extends Controller
+class SuperAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class EmergencyController extends Controller
      */
     public function index()
     {
-        //
+        return view('super-admin.super-admin-page');
     }
 
     /**
@@ -24,7 +23,7 @@ class EmergencyController extends Controller
      */
     public function create()
     {
-        // return view('emergency.create');
+        //
     }
 
     /**
@@ -35,31 +34,16 @@ class EmergencyController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $formFields = $request->validate([
-            'name' => 'required',
-            'ip' => 'required',
-            'region' => 'required',
-            'lat' => 'required',
-            'lng' => 'required',
-            'description' => 'required | min:3',
-        ]);
-
-        // dd($formFields);
-        
-        // Hashed Password        
-        Emergency::create($formFields);
-        
-        return redirect('/')->with('message', 'Emergency Submitted Successfully!');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Emergency  $emergency
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Emergency $emergency)
+    public function show($id)
     {
         //
     }
@@ -67,10 +51,10 @@ class EmergencyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Emergency  $emergency
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Emergency $emergency)
+    public function edit($id)
     {
         //
     }
@@ -79,10 +63,10 @@ class EmergencyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Emergency  $emergency
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Emergency $emergency)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,10 +74,10 @@ class EmergencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Emergency  $emergency
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Emergency $emergency)
+    public function destroy($id)
     {
         //
     }

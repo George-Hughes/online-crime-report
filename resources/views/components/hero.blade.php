@@ -1,5 +1,5 @@
 
-@props(['allCrimeTypes'])
+@props(['allCrimeTypes','location'])
 {{-- Report A Crime --}}
 <div class="modal fade" id="reportCrime" tabindex="-1" aria-labelledby="reportCrimeTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -26,11 +26,18 @@
                     @foreach ($allCrimeTypes as $allCrimeType)
                         <option value="{{ $allCrimeType->name }}" class="text-capitalize">{{ $allCrimeType->name }}</option>
                     @endforeach
-                    <option value="other">Other</option>
+                    <option value="Other" class="text-capitalize">Other</option>
                 </select>
                 <label for="description" class="text-muted h4 mt-3">Description:</label>
                 <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
-                
+                {{--  --}}
+                @if($location)
+                    <input type="text" name="ip" value="{{ $location->ip }}" hidden>
+                    <input type="text" name="region" value="{{ $location->regionName }}" hidden>
+                    <input type="text" name="lat" value="{{ $location->latitude }}" hidden>
+                    <input type="text" name="lng" value="{{ $location->longitude }}" hidden>
+                @endif
+                {{--  --}}
             </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -64,12 +71,20 @@
 
                 <label for="emergency" class="text-muted h4">Emergency Type:</label>
                 <select name="name" id="" class="form-control">
-                    <option value="trafic">Traffic</option>
-                    <option value="accident">Accident</option>
-                    <option value="other">Other</option>
+                    <option value="Trafic" class="text-capitalize">Traffic</option>
+                    <option value="Accident" class="text-capitalize">Accident</option>
+                    <option value="Other" class="text-capitalize">Other</option>
                 </select>
                 <label for="description" class="text-muted h4 mt-3">Description:</label>
                 <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
+                 {{--  --}}
+                 @if($location)
+                    <input type="text" name="ip" value="{{ $location->ip }}" hidden>
+                    <input type="text" name="region" value="{{ $location->regionName }}" hidden>
+                    <input type="text" name="lat" value="{{ $location->latitude }}" hidden>
+                    <input type="text" name="lng" value="{{ $location->longitude }}" hidden>
+                @endif
+                {{--  --}}
                 
             </div>
             <div class="modal-footer">
