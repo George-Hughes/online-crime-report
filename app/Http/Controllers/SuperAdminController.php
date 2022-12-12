@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -34,7 +35,29 @@ class SuperAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $formFields = $request->validate([
+            'first_name' => 'required | min:3',
+            'last_name' => 'required | min:3',
+            'other_name' => 'nullable|min:3',
+            'role' => 'nullable',
+            'gender' => 'required',
+            'dob' => 'required',
+            'contact' => 'required',
+            'email' => 'required | email | unique:users',
+            'password' => 'required | confirmed | min:6'
+        ]);
+
+        // dd($formFields);
+        
+        // Hashed Password
+        $formFields['password'] = bcrypt($formFields['password']);
+        
+        $user = User::create($formFields);
+
+        // auth()->login($user);
+        
+        return back()->with('message', 'Account created Successfully!');
     }
 
     /**

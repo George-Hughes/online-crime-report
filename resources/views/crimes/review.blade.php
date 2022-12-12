@@ -22,7 +22,7 @@
                     <span class="text-success text-capitalize">{{ $crime->status }}</span>
                 @endif
             </h5>
-            <h4>Crime Type: <span class="text-warning">{{ $crime->name }}</span></h4>
+            <h5>Crime Type: <span class="text-warning">{{ $crime->name }}</span></h5>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
 
     <div class="card mb-2 py-3 border-bottom-primary">
         <div class="card-body">
-            <h5 class="text-center">Detailed Description: <br><br><span class="text-muted">{{ $crime->description }}</span></h5>
+            <h5 class="text-center"><span class="font-weight-bold">Description:</span> <br><br><span class="text-muted">{{ $crime->description }}</span></h5>
         </div>
     </div>
  

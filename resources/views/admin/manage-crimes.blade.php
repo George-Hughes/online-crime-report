@@ -65,7 +65,12 @@
                           <div class="d-inline-flex">
                             <a class="btn btn-sm btn-outline-primary mr-1" href="/crimes/{{ $crime->id }}"><i class="fas fa-book"></i> Review</a>
 
-                            <a class="btn btn-sm btn-outline-success mr-1" href="/crimes/{{ $crime->id }}/update"><i class="fas fa-arrow-right"></i> Activate</a>
+                          <form action="/crimes/{{ $crime->id }}/update" method="POST" class="form">
+                              @csrf
+                              @method('PUT')
+                              <input type="text" name="status" value="active" hidden>
+                              <button class="btn btn-sm btn-outline-success mr-1" name="submit"><i class="fas fa-arrow-right"></i> Activate</button>
+                          </form>
 
                           <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
                               @csrf
@@ -114,9 +119,11 @@
                     <th>Crime ID</th>
                     <th>User_ID</th>
                     <th>Crime Type</th>
+                    <th>Location</th>
                     <th>Description</th>
                     <th>Status</th>
                     <th>Created</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -127,9 +134,20 @@
                         <td>{{ $crime->id }}</td>
                         <td>User id</td>
                         <td>{{ $crime->name }}</td>
+                        <td>{{ $crime->region }}</td>
                         <td>{{ $crime->description }}</td>
                         <td>{{ $crime->status }}</td>
                         <td>{{ date('M j, Y h:ia', strtotime($crime->created_at)) }}</td>
+                        <td>
+                          <div class="d-inline-flex">
+                            <a class="btn btn-sm btn-outline-primary mr-1" href="/crimes/{{ $crime->id }}"><i class="fas fa-book"></i> Review</a>
+
+                          <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-sm btn-outline-danger ms-2"><i class="fas fa-trash"></i> Delete</button>
+                          </form>
+                        </td>
                       </tr>
                     @endif
                 @endforeach

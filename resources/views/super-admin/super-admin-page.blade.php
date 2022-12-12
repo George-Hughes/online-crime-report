@@ -8,6 +8,7 @@
     <title>Online Crime Report - Register</title>
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <script src="{{ asset('assets/js/alpinejs.js') }}" defer></script>
 </head>
 
 <style>
@@ -96,9 +97,22 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
     }
+
+    .a-message{
+        position: fixed;
+        max-width: 400px;
+        /* margin: 0 auto; */
+        top: 30px;
+        left: 50%;
+        right: -50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+    }
 </style>
 
 <body>
+    <x-flash-message />
+
     <div class="container">
         <main class="form-signin w-100 m-auto">
             <a href="/"><img class="mb-4" src="{{ asset('assets/images/logo/gps_logo_blue.png') }}" alt="" width="200px"></a>
@@ -107,9 +121,9 @@
             <div>
                 <div class="bd-example-snippet bd-code-snippet">
                     <div class="bd-example">
-                        <form action="/users" method="POST" class="row g-3">
+                        <form action="/super-admin/admin" method="POST" class="row g-3">
                             @csrf
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" name="first_name" id="floatingInput" placeholder="george" value="{{ old('first_name') }}">
                                     <label for="floatingInput">First Name</label>
@@ -202,8 +216,6 @@
                             <input type="text" value="1" name="role" hidden>
                             <div class="col-12">
                                 <button class="w-100 btn btn-lg btn-secondary" type="submit">Sign Up</button>
-                                <p class="mt-5 mb-3 text-muted text-center">Already having an account, <a
-                                        class="text-primary" href="/login">Login here</a></p>
                             </div>
                         </form>
                     </div>

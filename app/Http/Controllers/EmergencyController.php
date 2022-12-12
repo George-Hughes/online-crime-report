@@ -61,7 +61,9 @@ class EmergencyController extends Controller
      */
     public function show(Emergency $emergency)
     {
-        //
+        return view('emergency.review', [
+            'emergency' => $emergency
+        ]);
     }
 
     /**
@@ -84,7 +86,15 @@ class EmergencyController extends Controller
      */
     public function update(Request $request, Emergency $emergency)
     {
-        //
+        $formFields = $request->validate(
+            [
+                'status' => 'required',
+            ]
+        );
+        // dd($formFields);
+        $emergency->update($formFields);
+
+        return back()->with('message', 'Emergency Activated Successfully');
     }
 
     /**
@@ -95,6 +105,8 @@ class EmergencyController extends Controller
      */
     public function destroy(Emergency $emergency)
     {
-        //
+        $emergency->delete();
+
+        return back()->with('message', 'Emergency Deleted Successfully!');
     }
 }

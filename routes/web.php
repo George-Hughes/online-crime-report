@@ -65,6 +65,12 @@ Route::post('/emergency/create', [EmergencyTypeController::class, 'store']);
 // Store Emergency in Database
 Route::post('/emergency', [EmergencyController::class, 'store']);
 
+// Store Emergency in Database
+Route::put('/emergency/{emergency}/update', [EmergencyController::class, 'update']);
+
+// Delete Emergency form Database
+Route::delete('/emergency/{emergency}', [EmergencyController::class, 'destroy']);
+
 // ///////////////////////////// EMERGENCY /////////////////////////////
 
 
@@ -82,7 +88,7 @@ Route::post('/crimes/create', [CrimeTypeController::class, 'store']);
 Route::post('/crimes', [CrimeController::class, 'store']);
 
 // Store Crime in Database
-Route::post('/crimes/{crime}/update', [CrimeController::class, 'update']);
+Route::put('/crimes/{crime}/update', [CrimeController::class, 'update']);
 
 // Delete Crime form Database
 Route::delete('/crimes/{crime}', [CrimeController::class, 'destroy']);
@@ -90,9 +96,15 @@ Route::delete('/crimes/{crime}', [CrimeController::class, 'destroy']);
 // ///////////////////////////// CRIME /////////////////////////////
 
 
+
 // //////////////////////// SUPER ADMIN ///////////////////////////////
+// View Super Admin Page
 Route::get('/super-admin/admin', [SuperAdminController::class, 'index']);
+
+//  Store Users in database
+Route::post('/super-admin/admin', [SuperAdminController::class, 'store']);
 // //////////////////////// SUPER ADMIN ///////////////////////////////
+
 
 
 // ///////////////////////////// ADMIN /////////////////////////////
@@ -140,10 +152,16 @@ Route::post('/logout', [UserController::class, 'destroy'])->middleware('auth');
 // ///////////////////////// USER////////////////////////////
 
 
+
 ///////////////////////// CRIME STSRT ///////////////////////////
 // Show Single Crime Page
 Route::get('/crimes/{crime}', [CrimeController::class, 'show']);
 ///////////////////////// CRIME ENDS ///////////////////////////
+
+///////////////////////// EMERGENCY STSRT ///////////////////////////
+// Show Single Crime Page
+Route::get('/emergency/{emergency}', [EmergencyController::class, 'show']);
+///////////////////////// EMERGENCY  ENDS ///////////////////////////
 
 // ///////////////////////// NEWS END////////////////////////////
 // Show Single News Page
