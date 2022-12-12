@@ -3,7 +3,7 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Manage Users</h1>
+        <h1 class="h3 mb-2 text-gray-800">Manage Feedbacks</h1>
         <p class="mb-4">
           DataTables is a third party plugin that is used to generate the
           demo table below. For more information about DataTables, please
@@ -14,7 +14,7 @@
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-              List of Registered Users
+              List of All Feedbacks
             </h6>
           </div>
           <div class="card-body">
@@ -38,7 +38,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                @foreach ($users as $user)
+                {{-- @foreach ($users as $user)
                     <tr>
                         <td>{{ $number++ }}</td>
                         <td>{{ $user->id }}</td>
@@ -49,7 +49,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at }}</td>
                     </tr>
-                @endforeach
+                @endforeach --}}
                 </tbody>
               </table>
             </div>
@@ -58,7 +58,7 @@
 
         <div class="container">
             <div class="mt-3 p-3 pagination-md">
-                {{ $users->links() }}
+                {{-- {{ $feedbacks->links() }} --}}
             </div>
         </div>
 

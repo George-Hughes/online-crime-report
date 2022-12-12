@@ -52,13 +52,8 @@ class AdminController extends Controller
     public function manage_feedbacks(){
         $feedbacks = Feedback::latest()->paginate(5);
         return view('admin.manage-feedbacks', compact('feedbacks'));
-        // return view('admin.manage-feedbacks');
     }
     
-    // public function manage_feedbacks(){
-    //     $feedbacks = User::latest()->paginate(10);
-    //     return view('admin.manage-feedbacks', compact('feedbacks'));
-    // }
 
     /**
      * Show the form for creating a new resource.

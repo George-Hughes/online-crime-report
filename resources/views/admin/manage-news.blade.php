@@ -62,7 +62,7 @@
                             src="{{ asset('storage/'. $new->image) }}" 
                             alt="{{ $new->image }}">
                         </td>
-                        <td>{{ $new->created_at }}</td>
+                        <td>{{ date('M j, Y h:ia', strtotime($new->created_at)) }}</td>
                         <td>
                             <div class="d-inline-flex">
                               <a class="btn btn-sm btn-outline-warning mr-1" href="/news/{{ $new->id }}/edit"><i class="fas fa-edit"></i> Edit</a>

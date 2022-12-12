@@ -27,6 +27,10 @@
     <link href="{{ asset('assets2/css/sb-admin-2.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('assets/js/alpinejs.js') }}" defer></script>
 
+    {{--  --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    {{--  --}}
+
     {{-- Leaflet --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
@@ -34,6 +38,10 @@
      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
+
+     {{--  --}}
+     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+     {{--  --}}
   </head>
 
   <style>
@@ -120,7 +128,7 @@
 
         <!-- Nav Item - Crimes -->
         <li class="nav-item {{ request()->is('admin/manage-feedbacks') ? 'active' : '' }}">
-          <a class="nav-link" href="/admin/manage_feedbacks">
+          <a class="nav-link" href="/admin/manage-feedbacks">
             <i class="fas fa-fw fa-comment"></i>
             <span>Manage Feedbacks</span></a
           >
