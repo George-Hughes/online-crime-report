@@ -99,7 +99,7 @@ Route::delete('/crimes/{crime}', [CrimeController::class, 'destroy']);
 
 // //////////////////////// SUPER ADMIN ///////////////////////////////
 // View Super Admin Page
-Route::get('/super-admin/admin', [SuperAdminController::class, 'index']);
+Route::get('/super-admin/admin', [SuperAdminController::class, 'index'])->middleware('isSuperAdmin');
 
 //  Store Users in database
 Route::post('/super-admin/admin', [SuperAdminController::class, 'store']);

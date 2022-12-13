@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CrimeType;
+use App\Models\EmergencyType;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +23,9 @@ class NewsController extends Controller
         // $news = News::all();
         // return view('welcome',compact('news'));
         $allCrimeTypes = CrimeType::all();
+        $allEmergencyTypes = EmergencyType::all();
         $news = News::latest()->paginate(6);
-        return view('news.index',compact('news','allCrimeTypes','location'));
+        return view('news.index',compact('news','allCrimeTypes','location','allEmergencyTypes'));
     }
 
     // Show Create news page

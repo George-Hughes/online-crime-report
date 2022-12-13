@@ -1,5 +1,5 @@
 
-@props(['allCrimeTypes','location'])
+@props(['allCrimeTypes','location' , 'allEmergencyTypes'])
 {{-- Report A Crime --}}
 <div class="modal fade" id="reportCrime" tabindex="-1" aria-labelledby="reportCrimeTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -71,8 +71,9 @@
 
                 <label for="emergency" class="text-muted h4">Emergency Type:</label>
                 <select name="name" id="" class="form-control">
-                    <option value="Trafic" class="text-capitalize">Traffic</option>
-                    <option value="Accident" class="text-capitalize">Accident</option>
+                    @foreach ($allEmergencyTypes as $allEmergencyType)
+                        <option value="{{ $allEmergencyType->name }}" class="text-capitalize">{{ $allEmergencyType->name }}</option>
+                    @endforeach
                     <option value="Other" class="text-capitalize">Other</option>
                 </select>
                 <label for="description" class="text-muted h4 mt-3">Description:</label>

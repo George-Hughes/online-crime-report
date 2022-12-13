@@ -16,9 +16,9 @@ class CrimeTypeFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name' => 'robbery',
-            'description' => $this->faker->paragraph(3),
-        ];
+        // return [
+        //     'name' => 'robbery',
+        //     'description' => $this->faker->paragraph(3),
+        // ];
     }
 }

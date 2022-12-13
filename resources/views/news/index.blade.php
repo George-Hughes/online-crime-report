@@ -5,7 +5,7 @@
         {{-- Hero --}}
         {{-- @include('partials._hero') --}}
         {{-- @foreach ($allCrimeTypes as $allCrimeType) --}}
-            <x-hero :allCrimeTypes="$allCrimeTypes" :location="$location"/>
+            <x-hero :allCrimeTypes="$allCrimeTypes" :location="$location" :allEmergencyTypes="$allEmergencyTypes"/>
         {{-- @endforeach --}}
         {{-- Hero --}}
     </div>

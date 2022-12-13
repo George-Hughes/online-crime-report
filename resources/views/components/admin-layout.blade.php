@@ -235,7 +235,7 @@
                 >
                   <i class="fas fa-bell fa-fw"></i>
                   <!-- Counter - Alerts -->
-                  <span class="badge badge-danger badge-counter">3+
+                  <span class="badge badge-danger badge-counter">3+{{ request()->user()->count() }}
                     {{-- {{ $news->count() }} --}}
                   </span>
                 </a>

@@ -116,14 +116,14 @@
     <div class="container">
         <main class="form-signin w-100 m-auto">
             <a href="/"><img class="mb-4" src="{{ asset('assets/images/logo/gps_logo_blue.png') }}" alt="" width="200px"></a>
-            <h1 class="h3 mb-3 fw-normal text-center">Sign Up Here</h1>
+            <h1 class="h3 mb-3 fw-normal text-center">Create An Admin Here</h1>
 
             <div>
                 <div class="bd-example-snippet bd-code-snippet">
                     <div class="bd-example">
                         <form action="/super-admin/admin" method="POST" class="row g-3">
                             @csrf
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" name="first_name" id="floatingInput" placeholder="george" value="{{ old('first_name') }}">
                                     <label for="floatingInput">First Name</label>
