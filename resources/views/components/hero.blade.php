@@ -31,6 +31,10 @@
                 <label for="description" class="text-muted h4 mt-3">Description:</label>
                 <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
                 {{--  --}}
+                @if (auth()->user())
+                    <input type="text" name="user_id" value="{{ auth()->user()->id }}" hidden>
+                @endif
+
                 @if($location)
                     <input type="text" name="ip" value="{{ $location->ip }}" hidden>
                     <input type="text" name="region" value="{{ $location->regionName }}" hidden>
@@ -79,6 +83,10 @@
                 <label for="description" class="text-muted h4 mt-3">Description:</label>
                 <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
                  {{--  --}}
+                 {{-- @if (auth()->user())
+                    <input type="text" name="user_id" value="{{ auth()->user()->id }}">
+                @endif --}}
+                
                  @if($location)
                     <input type="text" name="ip" value="{{ $location->ip }}" hidden>
                     <input type="text" name="region" value="{{ $location->regionName }}" hidden>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnalysisReport;
 use App\Models\Crime;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class CrimeController extends Controller
             [
                 'name' => 'required',
                 'ip' => 'required',
+                'user_id' => 'nullable',
                 'region' => 'required',
                 'lat' => 'required',
                 'lng' => 'required',
@@ -62,9 +64,8 @@ class CrimeController extends Controller
      */
     public function show(Crime $crime)
     {
-        return view('crimes.review', [
-            'crime' => $crime
-        ]);
+        $analysis = AnalysisReport::all();
+        return view('crimes.review', compact('crime','analysis'));
     }
 
     /**

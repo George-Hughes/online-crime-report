@@ -54,7 +54,13 @@
                       <tr>
                         <td>{{ $number++ }}</td>
                         <td>{{ $crime->id }}</td>
-                        <td>User id</td>
+                        <td>
+                          @if ($crime->user_id == '')
+                            N/A
+                            @else
+                            {{ $crime->user_id }}
+                          @endif
+                        </td>
                         <td>{{ $crime->name }}</td>
                         <td>{{ $crime->region }}</td>
                         <td>{{ $crime->ip }}</td>
@@ -132,7 +138,13 @@
                       <tr>
                         <td>{{ $number++ }}</td>
                         <td>{{ $crime->id }}</td>
-                        <td>User id</td>
+                        <td>
+                          @if ($crime->user_id == '')
+                            N/A
+                            @else
+                            {{ $crime->user_id }}
+                          @endif
+                        </td>
                         <td>{{ $crime->name }}</td>
                         <td>{{ $crime->region }}</td>
                         <td>{{ $crime->description }}</td>
@@ -146,7 +158,7 @@
                               @csrf
                               @method('PUT')
                               <input type="text" name="status" value="closed" hidden>
-                              <button class="btn btn-sm btn-outline-success mr-1" name="submit"><i class="fas fa-arrow-right"></i> Close</button>
+                              <button class="btn btn-sm btn-outline-danger mr-1" name="submit"><i class="fas fa-arrow-right"></i> Close</button>
                           </form>
 
                           {{-- <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
@@ -189,7 +201,7 @@
                     <th>Description</th>
                     <th>Status</th>
                     <th>Closed By</th>
-                    <th>Created</th>
+                    <th>Date Closed</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -199,22 +211,28 @@
                       <tr>
                         <td>{{ $number++ }}</td>
                         <td>{{ $crime->id }}</td>
-                        <td>User id</td>
+                        <td>
+                          @if ($crime->user_id == '')
+                            N/A
+                            @else
+                            {{ $crime->user_id }}
+                          @endif
+                        </td>
                         <td>{{ $crime->name }}</td>
                         <td>{{ $crime->region }}</td>
                         <td>{{ $crime->description }}</td>
                         <td>{{ $crime->status }}</td>
                         <td>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</td>
-                        <td>{{ date('M j, Y h:ia', strtotime($crime->created_at)) }}</td>
+                        <td>{{ date('M j, Y h:ia', strtotime($crime->updated_at)) }}</td>
                         <td>
                           <div class="d-inline-flex">
                             <a class="btn btn-sm btn-outline-primary mr-1" href="/crimes/{{ $crime->id }}"><i class="fas fa-book"></i> Review</a>
 
-                          <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
+                          {{-- <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
                               @csrf
                               @method('DELETE')
                               <button class="btn btn-sm btn-outline-danger ms-2"><i class="fas fa-trash"></i> Delete</button>
-                          </form>
+                          </form> --}}
                         </td>
                       </tr>
                     @endif

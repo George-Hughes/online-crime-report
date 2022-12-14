@@ -8,9 +8,11 @@
      <input id="REGION" type="text" value="{{ $crime->region }}" hidden>
      {{-- Other data for js --}}
  
+     {{-- View Maps --}}
      <h1 class="display-5 text-center mt-2">Location of Residence</h1>
      <x-current-map />
 
+     {{-- View Crime --}}
      <h1 class="display-5 text-center mt-4">Crime Detail</h1>
      <div class="card mb-2 py-0 px-2 border-left-primary">
         <div class="card-body d-inline-flex align-items-center justify-content-between">
@@ -41,5 +43,203 @@
     </div>
  
      <a class="btn btn-primary text-white d-inline-block mr-3 my-5" href="/admin/manage-crimes"> &lang;&lang; Back to Crimes</a>
+
+     {{-- ANalysis --}}
+     @if ($crime->status == 'active')
+     <h1 class="display-5 text-center mt-4">Crime Analysis</h1>
+     <form action="/analysis/store" method="POST" class="form">
+        @csrf
+        <div class="card mb-2 py-0 px-2 border-left-primary">
+            <div class="card-body d-inline-flex align-items-center justify-content-between">
+                <h5>Arrested: </span></h5>
+                <div class="d-inline-flex align-items-center justify-content-between">
+                    <div class="form-check mr-3">
+                        <input class="form-check-input" type="radio" name="arrest" value="YES" id="YES-ARREST" value="option1">
+                        <label class="form-check-label" for="YES-ARREST">
+                            YES
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="arrest" value="NO" id="NO-ARREST" value="option1">
+                        <label class="form-check-label" for="NO-ARREST">
+                            NO
+                        </label>
+                    </div>
+                    <input type="text" name="officer_in_charge" class="form-control ml-5" placeholder="Officer in charge">
+                </div>
+            </div>
+        </div> 
+        <div class="card mb-2 py-0 px-2 border-left-primary">
+            <div class="card-body d-inline-flex align-items-center justify-content-between">
+                <h5>Court: </span></h5>
+                <div class="d-inline-flex align-items-center justify-content-between">
+                    <div class="form-check mr-3">
+                        <input class="form-check-input" type="radio" name="court" value="YES" id="YES-COURT" value="option1">
+                        <label class="form-check-label" for="YES-COURT">
+                            YES
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="court" value="NO" id="NO-COURT" value="option1">
+                        <label class="form-check-label" for="NO-COURT">
+                            NO
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="card mb-2 py-0 px-2 border-left-primary">
+            <div class="card-body d-inline-flex align-items-center justify-content-between">
+                <h5>Remand: </span></h5>
+                <div class="d-inline-flex align-items-center justify-content-between">
+                    <div class="form-check mr-3">
+                        <input class="form-check-input" type="radio" name="remand" value="YES" id="YES-REMAND" value="option1">
+                        <label class="form-check-label" for="YES-REMAND">
+                            YES
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="remand" value="NO" id="NO-REMAND" value="option1">
+                        <label class="form-check-label" for="NO-REMAND">
+                            NO
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="card mb-2 py-0 px-2 border-left-primary">
+            <div class="card-body d-inline-flex align-items-center justify-content-between">
+                <h5>Jailed: </span></h5>
+                <div class="d-inline-flex align-items-center justify-content-between">
+                    <div class="form-check mr-3">
+                        <input class="form-check-input" type="radio" name="jailed" value="YES" id="YES-JAILED" value="option1" >
+                        <label class="form-check-label" for="YES-JAILED">
+                            YES
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jailed" value="NO" id="NO-JAILED" value="option1" >
+                        <label class="form-check-label" for="NO-JAILED">
+                            NO
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="card mb-2 py-0 px-2 border-left-primary">
+            <div class="card-body d-inline-flex align-items-center justify-content-between">
+                <h5>Remarks: </span></h5>
+                <div class="">
+                    <div class="">
+                        <textarea id="" name="remarks" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <input type="text" name="crime_id" value="{{ $crime->id }}" hidden>
+        <button class="btn btn-primary" type="submit" name="submit">Submit Report</button>
+     </form>
+
+    <form action="/crimes/{{ $crime->id }}/close" method="POST" class="form ">
+        @csrf
+        @method('PUT')
+        <input type="text" name="status" value="closed" hidden>
+        <button class="btn btn-danger mr-1 mt-4" name="submit"><i class="fas fa-arrow-right"></i> Close Case</button>
+    </form>
+     @endif
+
+
+     {{-- Closed --}}
+   @if ($crime->status == 'closed')
+   @foreach ($analysis as $analyze)
+    @if ($analyze->crime_id == $crime->id)
+    <h1 class="display-5 text-center mt-4">Crime Analysis Details</h1>
+    <div class="card mb-2 py-0 px-2 border-left-primary">
+        <div class="card-body d-inline-flex align-items-center justify-content-between">
+            <h5>Arrested: </span></h5>
+            <div class="d-inline-flex align-items-center justify-content-between">
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="arrest" value="YES" id="YES-ARREST" value="option1" disabled checked>
+                    <label class="form-check-label" for="YES-ARREST">
+                        @if( $analyze->arrest == 'YES' )
+                            YES
+                        @else
+                            NO
+                        @endif
+                    </label>
+                </div>
+                <input type="text" name="officer_in_charge" class="form-control ml-5" value="{{ $analyze->officer_in_charge }}" readonly>
+            </div>
+        </div>
+    </div> 
+    <div class="card mb-2 py-0 px-2 border-left-primary">
+        <div class="card-body d-inline-flex align-items-center justify-content-between">
+            <h5>Court: </span></h5>
+            <div class="d-inline-flex align-items-center justify-content-between">
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="court" value="YES" id="YES-COURT" value="option1" disabled checked>
+                    <label class="form-check-label" for="YES-COURT">
+                        @if( $analyze->court == 'YES' )
+                            YES
+                        @else
+                            NO
+                        @endif
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="card mb-2 py-0 px-2 border-left-primary">
+        <div class="card-body d-inline-flex align-items-center justify-content-between">
+            <h5>Remand: </span></h5>
+            <div class="d-inline-flex align-items-center justify-content-between">
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="remand" value="YES" id="YES-REMAND" value="option1" disabled checked>
+                    <label class="form-check-label" for="YES-REMAND">
+                        @if( $analyze->remand == 'YES' )
+                            YES
+                        @else
+                            NO
+                        @endif
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="card mb-2 py-0 px-2 border-left-primary">
+        <div class="card-body d-inline-flex align-items-center justify-content-between">
+            <h5>Jailed: </span></h5>
+            <div class="d-inline-flex align-items-center justify-content-between">
+                <div class="form-check mr-3">
+                    <input class="form-check-input" type="radio" name="jailed" value="YES" id="YES-JAILED" value="option1"  disabled checked>
+                    <label class="form-check-label" for="YES-JAILED">
+                        @if( $analyze->jailed == 'YES' )
+                            YES
+                        @else
+                            NO
+                        @endif
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="card mb-2 py-0 px-2 border-left-primary">
+        <div class="card-body d-inline-flex align-items-center justify-content-between">
+            <h5>Remarks: </span></h5>
+            <div class="">
+                <div class="">
+                    <textarea id="" name="remarks" cols="30" rows="10" class="form-control" readonly>{{ $analyze->remarks }}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif 
+   @endforeach
+   @endif
+
    </div>
+
+
+   
+
 </x-admin-layout>

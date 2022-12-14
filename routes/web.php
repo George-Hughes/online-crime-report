@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnalysisReportController;
 use App\Http\Controllers\CrimeController;
 use App\Http\Controllers\CrimeTypeController;
 use App\Http\Controllers\EmergencyController;
@@ -101,6 +102,11 @@ Route::delete('/crimes/{crime}', [CrimeController::class, 'destroy']);
 
 // ///////////////////////////// CRIME /////////////////////////////
 
+
+// ///////////// Analysis Report ///////////////////////////////////
+// Store Analysis Type in Database
+Route::post('/analysis/store', [AnalysisReportController::class, 'store']);
+// ///////////// Analysis Report ///////////////////////////////////
 
 
 // //////////////////////// SUPER ADMIN ///////////////////////////////

@@ -5,31 +5,36 @@
         }
     </style>
     <div class="container">
-        <table class="table table-bordered">
+        <table class="table table-bordered my-5">
             @php
                 $numberId = 1;
             @endphp
             <tr>
                 <th>#</th>
-                <th>Title</th>
+                <th>Crime Type</th>
+                <th>Location</th>
                 <th>Description</th>
-                <th>Image</th>
-                <th>Action</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Actions</th>
             </tr>
-            @unless ($news->isEmpty())
-                @foreach ($news as $new)
+            @unless ($crimes->isEmpty())
+                @foreach ($crimes as $crime)
                     <tr>
                         <td>{{ $numberId++ }}</td>
-                        <td>{{ $new->title }}</td>
-                        <td>{{ $new->description }}</td>
-                        <td><img 
-                            class="img img-fluid imgManage" 
-                            src="{{ asset('storage/'. $new->image) }}" 
-                            alt="{{ $new->image }}">
-                        </td>
+                        <td>{{ $crime->name }}</td>
+                        <td>{{ $crime->region }}</td>
+                        <td>{{ $crime->description }}</td>
+                        <td>{{ $crime->status }}</td>
+                        <td>{{ date('M j, Y h:ia', strtotime($crime->created_at)) }}</td>
                         <td>
-                            <a href="/news/{{ $new->id }}/edit" class="btn btn-warning">Edit</a>
+                          <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-sm btn-outline-danger ms-2"><i class="fas fa-trash"></i> Delete</button>
+                          </form>
                         </td>
+                      </tr>
                     </tr>
                 @endforeach
                 @else

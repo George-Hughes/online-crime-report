@@ -57,8 +57,13 @@ class User extends Authenticatable
         }
     }
 
-    // Relationship to User
+    // Relationship to News
     public function news(){
         return $this->belongsTo(News::class, 'user_id');
+    }
+
+    // Relationship to Crime
+    public function crimes(){
+        return $this->belongsTo(Crime::class, 'user_id');
     }
 }

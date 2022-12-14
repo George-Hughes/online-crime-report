@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('crimes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('ip')->default('154.160.21.7');
             $table->string('region')->default('Greater Accra Region');

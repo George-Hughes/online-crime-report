@@ -11,6 +11,7 @@ class Crime extends Model
 
     protected $fillable = [
         'name',
+        'user_id',
         'description',
         'status',
         'ip',
@@ -18,4 +19,10 @@ class Crime extends Model
         'lat',
         'lng'
     ];
+
+
+    // Relationship to User
+    public function user(){
+        return $this->belongsTo(Crime::class, 'user_id');
+    }
 }

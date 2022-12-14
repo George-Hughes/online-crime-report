@@ -11,7 +11,6 @@ const C_TYPE = document.getElementById("C-TYPE").value;
 const REGION = document.getElementById("REGION").value;
 
 // Map
-// showMap(5.5502, -0.2174);
 const coords = [LAT, LNG];
 
 const map = L.map("map").setView(coords, 10);
@@ -21,12 +20,14 @@ const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-// const marker = L.marker(coords)
-//     .addTo(map)
-//     .bindPopup(`${ID}: ${C_TYPE}.<br> ${REGION}.`)
-//     .openPopup();
+const marker = L.marker(coords)
+    .addTo(map)
+    .bindPopup(
+        `<span class="text-danger">ID:${ID} </span> ${C_TYPE}.<br> ${REGION}.`
+    )
+    .openPopup();
 
-// console.log(coords);
+console.log(coords);
 
 ////////////
 

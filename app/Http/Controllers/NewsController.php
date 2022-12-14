@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Crime;
 use App\Models\CrimeType;
 use App\Models\EmergencyType;
 use App\Models\News;
@@ -94,9 +95,11 @@ class NewsController extends Controller
 
     // Manage News
     public function manage(){
+        // $user = Auth::user();
+        // $news = News::where('user_id',$user->id)->orderBy('id','desc')->get();
         $user = Auth::user();
-        $news = News::where('user_id',$user->id)->orderBy('id','desc')->get();
-        return view('news.manage', compact('user','news'));
+        $crimes = Crime::where('user_id',$user->id)->orderBy('id','desc')->get();
+        return view('news.manage', compact('user','crimes'));
     }
 
     // Delete News
