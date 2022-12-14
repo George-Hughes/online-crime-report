@@ -97,6 +97,19 @@ class EmergencyController extends Controller
         return back()->with('message', 'Emergency Activated Successfully');
     }
 
+    public function close(Request $request, Emergency $emergency)
+    {
+        $formFields = $request->validate(
+            [
+                'status' => 'required',
+            ]
+        );
+        // dd($formFields);
+        $emergency->update($formFields);
+
+        return back()->with('message', 'Emergency Closed Successfully');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

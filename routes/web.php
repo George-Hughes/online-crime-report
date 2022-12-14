@@ -68,6 +68,9 @@ Route::post('/emergency', [EmergencyController::class, 'store']);
 // Store Emergency in Database
 Route::put('/emergency/{emergency}/update', [EmergencyController::class, 'update']);
 
+// Store Emergency in Database
+Route::put('/emergency/{emergency}/close', [EmergencyController::class, 'close']);
+
 // Delete Emergency form Database
 Route::delete('/emergency/{emergency}', [EmergencyController::class, 'destroy']);
 
@@ -89,6 +92,9 @@ Route::post('/crimes', [CrimeController::class, 'store']);
 
 // Store Crime in Database
 Route::put('/crimes/{crime}/update', [CrimeController::class, 'update']);
+
+// Close Crime
+Route::put('/crimes/{crime}/close', [CrimeController::class, 'close']);
 
 // Delete Crime form Database
 Route::delete('/crimes/{crime}', [CrimeController::class, 'destroy']);

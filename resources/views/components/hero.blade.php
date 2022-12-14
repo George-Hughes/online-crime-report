@@ -34,8 +34,8 @@
                 @if($location)
                     <input type="text" name="ip" value="{{ $location->ip }}" hidden>
                     <input type="text" name="region" value="{{ $location->regionName }}" hidden>
-                    <input type="text" name="lat" value="{{ $location->latitude }}" hidden>
-                    <input type="text" name="lng" value="{{ $location->longitude }}" hidden>
+                    <input type="text" class="Latitude" name="lat" value="" hidden>
+                    <input type="text" class="Longitude" name="lng" value="" hidden>
                 @endif
                 {{--  --}}
             </div>
@@ -82,8 +82,8 @@
                  @if($location)
                     <input type="text" name="ip" value="{{ $location->ip }}" hidden>
                     <input type="text" name="region" value="{{ $location->regionName }}" hidden>
-                    <input type="text" name="lat" value="{{ $location->latitude }}" hidden>
-                    <input type="text" name="lng" value="{{ $location->longitude }}" hidden>
+                    <input type="text" class="Latitude" name="lat" value="" hidden>
+                    <input type="text" class="Longitude" name="lng" value="" hidden>
                 @endif
                 {{--  --}}
                 
@@ -120,7 +120,7 @@
                 <div class="tab-content text-white mt-3" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-report" role="tabpanel"
                         aria-labelledby="nav-report-tab">
-                        <h4 class="display-6 mt-2">Report A Crime or Emergency</h4>
+                        <h4 class="display-6 mt-2">Report Crime or Emergency</h4>
                         <p class="text-white">To report a crime without an account will be recorded as
                             a crime tip or a whisle blower to the police and to report a crime with a
                             registered account will br recorded and saved.

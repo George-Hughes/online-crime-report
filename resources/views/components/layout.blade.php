@@ -174,6 +174,7 @@
     <script src="{{ asset('assets/js/all.min.js')}}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+    {{-- <script src="{{ asset('assets2/js/script.js') }}"></script> --}}
 </body>
 
 </html>

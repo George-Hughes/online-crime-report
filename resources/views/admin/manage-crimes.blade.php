@@ -72,11 +72,11 @@
                               <button class="btn btn-sm btn-outline-success mr-1" name="submit"><i class="fas fa-arrow-right"></i> Activate</button>
                           </form>
 
-                          <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
+                          {{-- <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
                               @csrf
                               @method('DELETE')
                               <button class="btn btn-sm btn-outline-danger ms-2"><i class="fas fa-trash"></i> Delete</button>
-                          </form>
+                          </form> --}}
 
                           </div>
                         </td>
@@ -102,7 +102,7 @@
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-warning">
-              Reviewed And Attended to Reported Crimes 
+              Investigating Crimes 
             </h6>
           </div>
           <div class="card-body">
@@ -142,6 +142,74 @@
                           <div class="d-inline-flex">
                             <a class="btn btn-sm btn-outline-primary mr-1" href="/crimes/{{ $crime->id }}"><i class="fas fa-book"></i> Review</a>
 
+                            <form action="/crimes/{{ $crime->id }}/close" method="POST" class="form">
+                              @csrf
+                              @method('PUT')
+                              <input type="text" name="status" value="closed" hidden>
+                              <button class="btn btn-sm btn-outline-success mr-1" name="submit"><i class="fas fa-arrow-right"></i> Close</button>
+                          </form>
+
+                          {{-- <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
+                              @csrf
+                              @method('DELETE')
+                              <button class="btn btn-sm btn-outline-danger ms-2"><i class="fas fa-trash"></i> Delete</button>
+                          </form> --}}
+                        </td>
+                      </tr>
+                    @endif
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-warning">
+              Closed Crimes 
+            </h6>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+              >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Crime ID</th>
+                    <th>User_ID</th>
+                    <th>Crime Type</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Closed By</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach ($crimes as $crime)
+                    @if ($crime->status == 'closed')
+                      <tr>
+                        <td>{{ $number++ }}</td>
+                        <td>{{ $crime->id }}</td>
+                        <td>User id</td>
+                        <td>{{ $crime->name }}</td>
+                        <td>{{ $crime->region }}</td>
+                        <td>{{ $crime->description }}</td>
+                        <td>{{ $crime->status }}</td>
+                        <td>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</td>
+                        <td>{{ date('M j, Y h:ia', strtotime($crime->created_at)) }}</td>
+                        <td>
+                          <div class="d-inline-flex">
+                            <a class="btn btn-sm btn-outline-primary mr-1" href="/crimes/{{ $crime->id }}"><i class="fas fa-book"></i> Review</a>
+
                           <form action="/crimes/{{ $crime->id }}" method="POST" class="form">
                               @csrf
                               @method('DELETE')
@@ -156,10 +224,6 @@
             </div>
           </div>
         </div>
-  
-        {{-- Map Section Start --}}
-        <x-current-map :crimes="$crimes"/>
-        {{-- Map Section End --}}
 
         <div class="container">
             <div class="mt-3 p-3 pagination-md">

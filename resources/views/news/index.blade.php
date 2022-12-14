@@ -55,8 +55,38 @@
 
     </div>
 
+    {{-- <h1 class="DD"></h1> --}}
+
 
 </main>
 
+<script>
+    // Geolocation API
+    const Latitude = document.querySelectorAll('.Latitude');
+    const Longitude = document.querySelectorAll('.Longitude');
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                console.log(position);
+                const { latitude } = position.coords;
+                const { longitude } = position.coords;
+                Latitude.forEach(lat=>lat.value = `${latitude}`)
+                Longitude.forEach(lat=>lat.value = `${longitude}`)
+             
+                var currentLocation = window.location;
+                console.log(currentLocation);
+                console.log(currentLocation.hostname);
+
+                let loc = window.location.href
+                console.log(loc);
+
+            },
+            function () {
+                alert("Could not get location");
+            }
+        );
+    }
+</script>
 </x-layout>
  

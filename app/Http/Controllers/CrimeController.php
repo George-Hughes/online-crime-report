@@ -100,6 +100,21 @@ class CrimeController extends Controller
         return back()->with('message', 'Crime Activated Successfully');
     }
 
+    public function close(Request $request, Crime $crime)
+    {
+        $formFields = $request->validate(
+            [
+                'status' => 'required',
+            ]
+        );
+
+        // dd($formFields);
+
+        $crime->update($formFields);
+
+        return back()->with('message', 'Crime Closed Successfully');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
