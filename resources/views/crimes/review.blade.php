@@ -10,7 +10,22 @@
  
      {{-- View Maps --}}
      <h1 class="display-5 text-center mt-2">Location of Residence</h1>
-     <x-current-map />
+     <div class="col-lg-12 mt-1">
+            <!-- Collapsable Card Example -->
+            <div class="card shadow mb-1">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-warning">Location of Residence</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExample">
+                    <div class="card-body w-100">
+                        <x-current-map />
+                    </div>
+                </div>
+            </div>
+     </div>
 
      {{-- View Crime --}}
      <h1 class="display-5 text-center mt-4">Crime Detail</h1>
@@ -41,6 +56,31 @@
             <h5 class="text-center"><span class="font-weight-bold">Description:</span> <br><br><span class="text-muted">{{ $crime->description }}</span></h5>
         </div>
     </div>
+
+    {{-- Reproters Details --}}
+    @foreach ($users as $user)
+        @if ($user->id == $crime->user_id)
+        <h1 class="display-5 text-center mt-4">Reporter's Details</h1>
+        <div class="card mb-2 py-0 px-2 border-left-primary">
+           <div class="card-body d-inline-flex align-items-center justify-content-between">
+               <h5>User Id: <span class="text-warning">{{ $user->id }}</span></h5>
+               <h5>Name: 
+                   <span class="text-danger text-capitalize">{{ $user->first_name }} {{ $user->last_name }}</span>
+                   <span class="text-success text-capitalize">{{ $user->status }}</span>
+               </h5>
+               <h5>Email: <span class="text-warning">{{ $user->email }}</span></h5>
+           </div>
+        </div>
+   
+        <div class="card mb-2 py-0 px-2 border-left-primary">
+           <div class="card-body d-inline-flex align-items-center justify-content-between">
+               <h5>Contact: <span class="text-warning">{{ $user->contact }}</span></h5>
+               <h5>DOB: <span class="text-warning">{{ date('M j, Y', strtotime($user->dob)) }}</span></h5>
+           </div>
+       </div>
+        @endif
+    @endforeach
+
  
      <a class="btn btn-primary text-white d-inline-block mr-3 my-5" href="/admin/manage-crimes"> &lang;&lang; Back to Crimes</a>
 
