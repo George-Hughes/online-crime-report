@@ -20,7 +20,7 @@
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardExample">
-                    <div class="card-body w-100">
+                    <div class="card-body">
                         <x-current-map />
                     </div>
                 </div>
@@ -108,6 +108,9 @@
                     <input type="text" name="officer_in_charge" class="form-control ml-5" placeholder="Officer in charge">
                 </div>
             </div>
+            @error('arrest')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div> 
         <div class="card mb-2 py-0 px-2 border-left-primary">
             <div class="card-body d-inline-flex align-items-center justify-content-between">
@@ -127,6 +130,9 @@
                     </div>
                 </div>
             </div>
+            @error('court')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div> 
         <div class="card mb-2 py-0 px-2 border-left-primary">
             <div class="card-body d-inline-flex align-items-center justify-content-between">
@@ -146,6 +152,9 @@
                     </div>
                 </div>
             </div>
+            @error('remand')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div> 
         <div class="card mb-2 py-0 px-2 border-left-primary">
             <div class="card-body d-inline-flex align-items-center justify-content-between">
@@ -165,13 +174,16 @@
                     </div>
                 </div>
             </div>
+            @error('jailed')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div> 
         <div class="card mb-2 py-0 px-2 border-left-primary">
             <div class="card-body d-inline-flex align-items-center justify-content-between">
                 <h5>Remarks: </span></h5>
                 <div class="">
                     <div class="">
-                        <textarea id="" name="remarks" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea id="" name="remarks" cols="60" rows="10" class="form-control"></textarea>
                     </div>
                 </div>
             </div>
@@ -268,7 +280,7 @@
             <h5>Remarks: </span></h5>
             <div class="">
                 <div class="">
-                    <textarea id="" name="remarks" cols="30" rows="10" class="form-control" readonly>{{ $analyze->remarks }}</textarea>
+                    <textarea id="" name="remarks" cols="60" rows="10" class="form-control" readonly>{{ $analyze->remarks }}</textarea>
                 </div>
             </div>
         </div>
